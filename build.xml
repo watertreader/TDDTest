@@ -5,17 +5,17 @@
               directory with the processing instruction <?eclipse.ant.import?>
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="TDDTest">
     <property environment="env"/>
-    <property name="ECLIPSE_HOME" value="../../../eclipse/jee-2021-12/eclipse/"/>
+    <property name="ECLIPSE_HOME" value="../../../eclipse/jee-2021-09/eclipse/"/>
     <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="17"/>
-    <property name="source" value="17"/>
+    <property name="target" value="12"/>
+    <property name="source" value="12"/>
     <path id="TDDTest.classpath">
         <pathelement location="bin"/>
         <pathelement location="lib/org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
         <pathelement location="lib/org.junit_4.13.0.v20200204-1500.jar"/>
     </path>
-    <path id="run.ToDoListTest (1).classpath">
+    <path id="run.sg.edu.nus.iss.epat.tdd.workshop (2).classpath">
         <path refid="TDDTest.classpath"/>
         <pathelement location="lib/org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
         <pathelement location="lib/org.junit_4.13.0.v20200204-1500.jar"/>
@@ -24,13 +24,11 @@
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
-                <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="test">
-                <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
@@ -39,7 +37,7 @@
         <delete dir="bin"/>
     </target>
     <target depends="clean" name="cleanall"/>
-    <target depends="build-subprojects,build-project,ToDoListTest (1),junitreport" name="build"/>
+    <target depends="build-subprojects,build-project,ToDoListTest,junitreport" name="build"/>
     <target name="build-subprojects"/>
     <target depends="init" name="build-project">
         <echo message="${ant.project.name}: ${ant.file}"/>
@@ -63,13 +61,13 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="ToDoListTest (1)">
+    <target name="ToDoListTest">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
             <test name="sg.edu.nus.iss.epat.tdd.workshop.ToDoListTest" todir="${junit.output.dir}"/>
             <jvmarg line="-ea"/>
-            <classpath refid="run.ToDoListTest (1).classpath"/>
+            <classpath refid="run.sg.edu.nus.iss.epat.tdd.workshop (2).classpath"/>
         </junit>
     </target>
     <target name="junitreport">
